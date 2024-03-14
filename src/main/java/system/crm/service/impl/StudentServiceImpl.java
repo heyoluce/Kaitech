@@ -33,8 +33,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional(readOnly = true)
-    public Student getByUsername(String username) {
-        return studentRepository.findByUsername(username)
+    public Student getByEmail(String email) {
+        return studentRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
     }
 
@@ -46,7 +46,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student create(Student student) {
-        if (studentRepository.findByUsername(student.getUsername()).isPresent()) {
+        if (studentRepository.findByEmail(student.getEmail()).isPresent()) {
             throw new IllegalStateException("Student already exists.");
         }
         studentRepository.save(student);

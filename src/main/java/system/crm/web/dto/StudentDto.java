@@ -20,9 +20,6 @@ public class StudentDto {
 
     private Long id;
 
-    @NotBlank(message = "Username is required", groups = {OnCreate.class, OnUpdate.class})
-    private String username;
-
     @NotBlank(message = "First name is required", groups = {OnCreate.class, OnUpdate.class})
     private String firstName;
 

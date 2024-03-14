@@ -16,8 +16,6 @@ public class Mentor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
-
     @Column(name="email")
     private String email;
 

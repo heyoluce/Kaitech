@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/kaitechcrm
     username: postgres
-    password: postgres
+    password: root
     driver-class-name: org.postgresql.Driver
 
 
@@ -13,5 +13,5 @@ spring:
       - classpath:db/migration
     url: jdbc:postgresql://localhost:5432/kaitechcrm
     user: postgres
-    password: postgres
+    password: root
     default-schema: kaitech
