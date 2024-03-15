@@ -7,7 +7,6 @@ create type dayOfTheWeek as enum ('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 
 create table users
 (
     id           bigserial primary key,
-    username varchar(255) unique,
     first_name    varchar(255),
     last_name     varchar(255),
     date_of_birth date,
@@ -35,7 +34,6 @@ create table courses
 create table mentors
 (
     id bigserial primary key ,
-    username varchar(255) unique,
     email varchar(255) unique ,
     first_name varchar(255),
     last_name varchar(255),
@@ -65,7 +63,6 @@ create table groups
 create table students
 (
     id           bigserial primary key,
-    username varchar(255) unique,
     first_name    varchar(255),
     last_name     varchar(255),
     email varchar(255) unique ,

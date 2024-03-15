@@ -29,7 +29,7 @@ public class UserDto {
     private String lastName;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date_of_birth;
+    private LocalDate dateOfBirth;
 
     @Pattern(regexp = "\\+996\\d{9}", message = "Invalid phone number format", groups = {OnUpdate.class, OnCreate.class} )
     private String phoneNumber;
@@ -41,13 +41,14 @@ public class UserDto {
     @NotNull(message = "Password must be not null", groups = {OnCreate.class, OnUpdate.class})
     private String password;
 
+
     private Set<Role> roles;
 
     private boolean enabled;
 
-    private String image_url;
+    private String imageUrl;
 
-    private Date last_visit_date;
+    private Date lastVisitDate;
 
     private Status status;
 
