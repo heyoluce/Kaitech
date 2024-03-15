@@ -45,8 +45,33 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
+// Below are configurations specific to Heroku deployment
 
+bootJar {
+    archiveFileName = "crm-system.jar" // Replace with your application name
+}
 
+bootJar {
+	launchScript()
+}
+
+jar {
+	enabled = true
+}
+
+// This task creates a Procfile for Heroku deployment
+task stage {
+	dependsOn bootJar
+	doLast {
+		copy {
+			from bootJar.archiveFile
+			into projectDir
+			rename { filename ->
+				'crm-system.jar' // Replace with your application name
+			}
+		}
+	}
+}
 
 tasks.named('test') {
 	useJUnitPlatform()
