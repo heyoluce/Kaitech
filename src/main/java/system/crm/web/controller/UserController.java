@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import system.crm.domain.entity.User;
+import system.crm.domain.exception.ResourceNotFoundException;
 import system.crm.service.UserService;
 import system.crm.web.dto.UserDto;
 import system.crm.web.dto.validation.OnUpdate;
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getById(@PathVariable Long id) {
+    public ResponseEntity<UserDto> getById(@PathVariable Long id) throws ResourceNotFoundException {
         User user = userService.getById(id);
         return ResponseEntity.ok(userMapper.toDto(user));
     }

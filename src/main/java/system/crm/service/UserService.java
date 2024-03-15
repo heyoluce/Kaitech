@@ -5,7 +5,7 @@ import system.crm.domain.entity.User;
 public interface UserService {
     User getById(Long id);
 
-    User getByUsername(String username);
+    User getByEmail(String email);
 
     User update(User user);
 
