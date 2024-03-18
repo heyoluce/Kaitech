@@ -13,13 +13,8 @@ import system.crm.web.dto.validation.OnUpdate;
 
 @Data
 public class MentorDto {
-    private Long id;
-
-    @NotBlank(message = "First name is required", groups = {OnCreate.class, OnUpdate.class})
-    private String firstName;
-
-    @NotBlank(message = "Last name is required", groups = {OnCreate.class, OnUpdate.class})
-    private String lastName;
+    @NotBlank(message = "Full name is required", groups = {OnCreate.class, OnUpdate.class})
+    private String fullName;
 
     @Email(message = "Invalid email address", groups = {OnCreate.class, OnUpdate.class})
     private String email;
@@ -27,12 +22,7 @@ public class MentorDto {
     @NotBlank(message = "Phone number is required", groups = {OnCreate.class, OnUpdate.class})
     private String phoneNumber;
 
-    @NotNull(message = "Status is required", groups = {OnCreate.class, OnUpdate.class})
-    private Status status;
-
     private Long courseId;
-
-    private Integer salary;
 
     private String imageUrl;
 

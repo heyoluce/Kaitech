@@ -54,7 +54,6 @@ public class MentorController {
         if (existingMentor == null) {
             return ResponseEntity.notFound().build();
         }
-        mentorDto.setId(id);
         Mentor updatedMentor = mentorService.update(mentorMapper.toEntity(mentorDto));
         MentorDto updatedMentorDto = mentorMapper.toDto(updatedMentor);
         return ResponseEntity.ok(updatedMentorDto);

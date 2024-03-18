@@ -19,21 +19,23 @@ import java.util.Set;
 @Data
 public class UserDto {
 
-    private Long id;
-
     @NotNull(message = "First name must be not null", groups = {OnCreate.class, OnUpdate.class})
     @Length(max=255, message = "First name length must be smaller than 255 symbols", groups = {OnCreate.class, OnUpdate.class})
     private String firstName;
 
+    @NotNull(message = "Last name must be not null", groups = {OnCreate.class, OnUpdate.class})
     @Length(max=255, message = "Last name length must be smaller than 255 symbols", groups = {OnCreate.class, OnUpdate.class})
     private String lastName;
 
+    @NotNull(message = "Date of birth must not be null", groups = {OnCreate.class, OnUpdate.class})
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
+    @NotNull(message = "Phone number must not be null", groups = {OnCreate.class, OnUpdate.class})
     @Pattern(regexp = "\\+996\\d{9}", message = "Invalid phone number format", groups = {OnUpdate.class, OnCreate.class} )
     private String phoneNumber;
 
+    @NotNull(message = "Email must not be null", groups = {OnCreate.class, OnUpdate.class})
     @Email(message = "Email must be valid", groups = {OnUpdate.class, OnCreate.class})
     private String email;
 
@@ -41,15 +43,7 @@ public class UserDto {
     @NotNull(message = "Password must be not null", groups = {OnCreate.class, OnUpdate.class})
     private String password;
 
-
     private Set<Role> roles;
 
-    private boolean enabled;
-
     private String imageUrl;
-
-    private Date lastVisitDate;
-
-    private Status status;
-
 }

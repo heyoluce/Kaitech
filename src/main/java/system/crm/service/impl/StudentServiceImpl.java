@@ -28,7 +28,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> getAll() {
-        return studentRepository.findAll();
+        List<Student> allStudents = studentRepository.findAll();
+        if(allStudents.isEmpty()) throw new ResourceNotFoundException("Список студентов пуст.");
+        else return allStudents;
     }
 
     @Override

@@ -21,10 +21,7 @@ public class StudentDto {
     private Long id;
 
     @NotBlank(message = "First name is required", groups = {OnCreate.class, OnUpdate.class})
-    private String firstName;
-
-    @NotBlank(message = "Last name is required", groups = {OnCreate.class, OnUpdate.class})
-    private String lastName;
+    private String fullName;
 
     @Email(message = "Invalid email address", groups = {OnCreate.class, OnUpdate.class})
     private String email;
@@ -32,22 +29,5 @@ public class StudentDto {
     @NotBlank(message = "Phone number is required", groups = {OnCreate.class, OnUpdate.class})
     private String phoneNumber;
 
-    @NotNull(message = "Status is required", groups = {OnCreate.class, OnUpdate.class})
-    private Status status;
-
-    private Long groupId;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date dateOfBirth;
-
-    @NotNull(message = "Gender is required", groups = {OnCreate.class, OnUpdate.class})
-    private Gender gender;
-
-    @NotNull(message = "Total debt is required", groups = {OnCreate.class, OnUpdate.class})
-    @DecimalMin(value = "0.0", message = "Total debt must be greater than or equal to 0", groups = {OnCreate.class, OnUpdate.class})
-    private BigDecimal totalDebt;
-
-    @NotNull(message = "Total payment is required", groups = {OnCreate.class, OnUpdate.class})
-    @DecimalMin(value = "0.0", message = "Total payment must be greater than or equal to 0", groups = {OnCreate.class, OnUpdate.class})
-    private BigDecimal totalPayment;
+    private Long courseId;
 }
