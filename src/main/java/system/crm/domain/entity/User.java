@@ -45,10 +45,10 @@ public class User implements Serializable {
     private boolean enabled;
 
     @Column(name="image_url")
-    private String image_url;
+    private String imageUrl;
 
     @Column(name="last_visit_date")
-    private Date last_visit_date;
+    private Date lastVisitDate;
 
     @Column(name="status")
     @Enumerated(value = EnumType.STRING)

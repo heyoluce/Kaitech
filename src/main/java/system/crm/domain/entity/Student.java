@@ -46,9 +46,9 @@ public class Student implements Serializable {
     private Gender gender;
 
     @Column(name="total_debt")
-    private BigDecimal total_debt;
+    private BigDecimal totalDebt;
 
     @Column(name="total_payment")
-    private BigDecimal total_payment;
+    private BigDecimal totalPayment;
 
 }

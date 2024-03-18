@@ -17,8 +17,8 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="name")
-    private String name;
+    @Column(name="group_name")
+    private String groupName;
 
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")

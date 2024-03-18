@@ -40,6 +40,6 @@ public class Mentor implements Serializable {
     private Course course;
 
     @Column(name="image_url")
-    private String image_url;
+    private String imageUrl;
 
 }

@@ -13,8 +13,8 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="name")
-    private String name;
+    @Column(name="course_name")
+    private String courseName;
 
     @Column(name="cost")
     private Integer cost;
@@ -26,7 +26,7 @@ public class Course {
     private String description;
 
     @Column(name="image_url")
-    private String image_url;
+    private String imageUrl;
 
     @Column(name="status")
     @Enumerated(value = EnumType.STRING)
