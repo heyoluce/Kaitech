@@ -8,7 +8,7 @@ public interface StudentService {
     Student getById(Long id);
 
     List<Student> getAll();
-    Student getByEmail(String email);
+    Student getByUsername(String username);
 
     Student update(Student student);
 

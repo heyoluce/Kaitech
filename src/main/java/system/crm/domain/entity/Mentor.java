@@ -2,8 +2,6 @@ package system.crm.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import system.crm.domain.enums.Status;
 
 import java.io.Serializable;
@@ -16,11 +14,11 @@ public class Mentor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="email")
-    private String email;
+    @Column(name="username")
+    private String username;
 
-    @Column(name="full_name")
-    private String fullName;
+    @Column(name="name")
+    private String name;
 
     @Column(name="phone_number")
     private String phoneNumber;

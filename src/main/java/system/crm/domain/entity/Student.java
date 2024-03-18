@@ -18,11 +18,11 @@ public class Student implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="full_name")
-    private String fullName;
+    @Column(name="name")
+    private String name;
 
-    @Column(name="email")
-    private String email;
+    @Column(name="username")
+    private String username;
 
     @Column(name="phone_number")
     private String phoneNumber;

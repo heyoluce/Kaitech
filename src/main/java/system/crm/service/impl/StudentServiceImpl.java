@@ -3,18 +3,16 @@ package system.crm.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import system.crm.domain.entity.Mentor;
 import system.crm.domain.entity.Student;
 import system.crm.domain.exception.ResourceNotFoundException;
-import system.crm.repository.MentorRepository;
 import system.crm.repository.StudentRepository;
-import system.crm.service.MentorService;
 import system.crm.service.StudentService;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
@@ -29,16 +27,16 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getAll() {
         List<Student> allStudents = studentRepository.findAll();
-        if(allStudents.isEmpty()) throw new ResourceNotFoundException("Список студентов пуст.");
+        if(allStudents.isEmpty()) throw new ResourceNotFoundException("List of students is empty.");
         else return allStudents;
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Student getByEmail(String email) {
-        return studentRepository.findByEmail(email)
+    public Student getByUsername(String username) {
+        return studentRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
     }
+
 
     @Override
     public Student update(Student student) {
@@ -48,7 +46,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student create(Student student) {
-        if (studentRepository.findByEmail(student.getEmail()).isPresent()) {
+        if (studentRepository.findByUsername(student.getUsername()).isPresent()) {
             throw new IllegalStateException("Student already exists.");
         }
         studentRepository.save(student);
