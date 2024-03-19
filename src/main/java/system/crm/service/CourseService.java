@@ -1,11 +1,11 @@
 package system.crm.service;
 
-import system.crm.domain.entity.Course;
+import system.crm.web.dto.CourseDto;
 
 import java.util.List;
 
 public interface CourseService {
-    Course findById(Long id);
-    List<Course> findAllByCourseName(String courseName);
-
+    CourseDto getById(Long id);
+    CourseDto create(CourseDto courseDto);
+    List<CourseDto> getAllCourses();
 }

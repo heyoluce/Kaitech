@@ -2,6 +2,7 @@ package system.crm.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import system.crm.domain.enums.CourseField;
 import system.crm.domain.enums.Status;
 
 @Entity
@@ -14,7 +15,8 @@ public class Course {
     private Long id;
 
     @Column(name="course_name")
-    private String courseName;
+    @Enumerated(value = EnumType.STRING)
+    private CourseField courseName;
 
     @Column(name="cost")
     private Integer cost;

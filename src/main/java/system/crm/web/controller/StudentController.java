@@ -1,11 +1,14 @@
 package system.crm.web.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import system.crm.domain.entity.Student;
+import system.crm.domain.exception.ResourceNotFoundException;
 import system.crm.service.StudentService;
 import system.crm.web.dto.StudentDto;
 import system.crm.web.dto.validation.OnCreate;
@@ -18,18 +21,24 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/student")
 @Validated
+@Tag(
+        name = "Student Controller",
+        description = "Student API"
+)
 public class StudentController {
 
     private final StudentService studentService;
     private final StudentMapper studentMapper;
 
     @GetMapping("/{id}")
-    public StudentDto getStudentById(@PathVariable("id") Long id) {
+    @Operation(summary = "Get student by ID")
+    public ResponseEntity<StudentDto> getStudentById(@PathVariable("id") Long id) {
         Student student = studentService.getById(id);
-        return studentMapper.toDto(student);
+        return ResponseEntity.ok(studentMapper.toDto(student));
     }
 
     @GetMapping
+    @Operation(summary = "Get all students")
     public ResponseEntity<List<StudentDto>> getAllStudents() {
         List<Student> students = studentService.getAll();
         List<StudentDto> studentDtos = studentMapper.toDto(students);
@@ -37,32 +46,25 @@ public class StudentController {
     }
 
     @PostMapping
+    @Operation(summary = "Create a student")
     public ResponseEntity<StudentDto> createStudent(@Validated(OnCreate.class) @RequestBody StudentDto studentDto) {
-        Student student = studentMapper.toEntity(studentDto);
-        Student createdStudent = studentService.create(student);
-        StudentDto createdStudentDto = studentMapper.toDto(createdStudent);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdStudentDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.create(studentDto));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<StudentDto> updateStudent(@PathVariable("id") Long id, @Validated(OnUpdate.class) @RequestBody StudentDto studentDto) {
-        Student existingStudent = studentService.getById(id);
+    @PatchMapping("/update")
+    @Operation(summary = "Update info about student")
+    public ResponseEntity<StudentDto> updateStudent(@RequestParam(name = "email") String email, @Validated(OnUpdate.class) @RequestBody StudentDto studentDto) throws ResourceNotFoundException {
+        return ResponseEntity.ok(studentService.update(email, studentDto));
+    }
+
+    @DeleteMapping("delete")
+    @Operation(summary = "Delete student by email")
+    public ResponseEntity<Void> deleteStudent(@RequestParam String email) {
+        Student existingStudent = studentService.getByEmail(email);
         if (existingStudent == null) {
             return ResponseEntity.notFound().build();
         }
-        studentDto.setId(id);
-        Student updatedStudent = studentService.update(studentMapper.toEntity(studentDto));
-        StudentDto updatedStudentDto = studentMapper.toDto(updatedStudent);
-        return ResponseEntity.ok(updatedStudentDto);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable("id") Long id) {
-        Student existingStudent = studentService.getById(id);
-        if (existingStudent == null) {
-            return ResponseEntity.notFound().build();
-        }
-        studentService.delete(id);
+        studentService.delete(email);
         return ResponseEntity.noContent().build();
     }
 }

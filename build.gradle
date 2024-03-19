@@ -59,9 +59,9 @@ jar {
 }
 
 flyway {
-	url = 'jdbc:postgresql://localhost:5432/kaitechcrm'
-	user = 'postgres'
-	password = 'postgres'
+	url = "jdbc:postgresql://" + System.getenv("PROD_DB_HOST") + ":" + System.getenv("PROD_DB_PORT") + "/" + System.getenv("PROD_DB_NAME")
+	user = System.getenv("PROD_DB_USERNAME")
+	password = System.getenv("PROD_DB_PASSWORD")
 	locations = ['filesystem:src/main/resources/db/migration']
 	configurations = ['flywayMigration']
 }

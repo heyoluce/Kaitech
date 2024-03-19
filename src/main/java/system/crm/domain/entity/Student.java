@@ -18,8 +18,8 @@ public class Student implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="name")
-    private String name;
+    @Column(name="full_name")
+    private String fullName;
 
     @Column(name="username")
     private String username;
@@ -27,16 +27,15 @@ public class Student implements Serializable {
     @Column(name="phone_number")
     private String phoneNumber;
 
-    @Column(name="status")
-    @Enumerated(value = EnumType.STRING)
-    private Status status;
-
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "id")
     private Group group;
 
     @Column(name="date_of_birth")
     private Date dateOfBirth;
+    @Column(name="status")
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
 
     @Column(name="gender")
     @Enumerated(value = EnumType.STRING)

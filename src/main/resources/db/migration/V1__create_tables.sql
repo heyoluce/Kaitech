@@ -22,11 +22,12 @@ CREATE TABLE IF NOT EXISTS mentors (
 
 CREATE TABLE IF NOT EXISTS students (
                                         id SERIAL PRIMARY KEY,
-                                        name VARCHAR(255),
+                                        full_name VARCHAR(255),
                                         username VARCHAR(255),
                                         phone_number VARCHAR(255),
                                         status VARCHAR(255),
                                         group_id BIGINT,
+                                        course_id BIGINT,
                                         date_of_birth TIMESTAMP WITHOUT TIME ZONE,
                                         gender VARCHAR(255),
                                         total_debt DECIMAL,
