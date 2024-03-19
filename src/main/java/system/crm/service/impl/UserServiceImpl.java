@@ -21,8 +21,10 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public User getById(Long id) {
-        return userRepository.findById(id)
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        System.out.println(user.getUsername());
+        return user;
     }
 
     @Override
@@ -36,9 +38,10 @@ public class UserServiceImpl implements UserService {
     public User update(User user) {
         User existing = getById(user.getId());
         existing.setName(user.getName());
-        existing.setUsername(user.getUsername());
-        existing.setPassword(user.getPassword());
-        return userRepository.save(existing);
+        user.setUsername(user.getUsername());
+        user.setPassword(user.getPassword());
+        userRepository.save(user);
+        return user;
     }
 
 

@@ -1,43 +1,57 @@
 package system.crm.web.controller;
 
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import system.crm.domain.entity.User;
-import system.crm.domain.exception.ResourceNotFoundException;
 import system.crm.service.UserService;
 import system.crm.web.dto.UserDto;
 import system.crm.web.dto.validation.OnUpdate;
 import system.crm.web.mappers.UserMapper;
 
 @RestController
+@RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/user")
 @Validated
+@Tag(
+        name = "User Controller",
+        description = "User API"
+)
 public class UserController {
 
     private final UserService userService;
     private final UserMapper userMapper;
 
     @PutMapping
-    public ResponseEntity<UserDto> update(@Validated(OnUpdate.class)
-                          @RequestBody UserDto userDto) {
-        User user = userMapper.toEntity(userDto);
+    @Operation(summary = "Update user")
+    public UserDto update(
+            @Validated(OnUpdate.class)
+            @RequestBody final UserDto dto
+    ) {
+        User user = userMapper.toEntity(dto);
         User updatedUser = userService.update(user);
-        return ResponseEntity.ok(userMapper.toDto(updatedUser));
+        return userMapper.toDto(updatedUser);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getById(@PathVariable Long id) throws ResourceNotFoundException {
+    @Operation(summary = "Get UserDto by id")
+    public UserDto getById(
+            @PathVariable  final Long id
+    ) {
         User user = userService.getById(id);
-        return ResponseEntity.ok(userMapper.toDto(user));
+        return userMapper.toDto(user);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id) {
+    @Operation(summary = "Delete user by id")
+    public void deleteById(
+            @PathVariable final Long id
+    ) {
         userService.delete(id);
-        return ResponseEntity.ok(HttpStatus.NO_CONTENT);
     }
+
+
 }

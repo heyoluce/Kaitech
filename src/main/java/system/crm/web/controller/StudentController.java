@@ -1,6 +1,5 @@
 package system.crm.web.controller;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +24,9 @@ public class StudentController {
     private final StudentMapper studentMapper;
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentDto> getStudentById(@PathVariable("id") Long id) {
+    public StudentDto getStudentById(@PathVariable("id") Long id) {
         Student student = studentService.getById(id);
-        if (student == null) {
-            return ResponseEntity.notFound().build();
-        }
-        StudentDto studentDto = studentMapper.toDto(student);
-        return ResponseEntity.ok(studentDto);
+        return studentMapper.toDto(student);
     }
 
     @GetMapping

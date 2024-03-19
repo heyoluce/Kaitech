@@ -23,14 +23,14 @@ public class User implements Serializable {
     @Column(name="name")
     private String name;
 
+    @Column(name="username")
+    private String username;
+
     @Column(name="date_of_birth")
     private Date date_of_birth;
 
     @Column(name = "phone_number")
-    private String phoneNumber;
-
-    @Column(name="username")
-    private String username;
+    private String phone_number;
 
     @Column(name="password")
     private String password;
@@ -40,15 +40,16 @@ public class User implements Serializable {
     private Set<Role> roles;
 
     @Column(name="enabled")
-    private boolean enabled;
+    private Boolean enabled;
 
     @Column(name="image_url")
-    private String imageUrl;
+    private String image_url;
 
     @Column(name="last_visit_date")
-    private Date lastVisitDate;
+    private Date last_visit_date;
 
     @Column(name="status")
     @Enumerated(value = EnumType.STRING)
     private Status status;
 }
+

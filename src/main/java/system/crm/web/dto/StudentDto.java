@@ -9,7 +9,7 @@ import system.crm.web.dto.validation.OnUpdate;
 @Data
 public class StudentDto {
 
-    private Long id;
+    Long id;
 
     @NotBlank(message = "First name is required", groups = {OnCreate.class, OnUpdate.class})
     private String name;

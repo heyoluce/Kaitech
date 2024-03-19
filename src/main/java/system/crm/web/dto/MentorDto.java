@@ -10,6 +10,7 @@ import system.crm.web.dto.validation.OnUpdate;
 
 @Data
 public class MentorDto {
+    Long id;
     @NotBlank(message = "Full name is required", groups = {OnCreate.class, OnUpdate.class})
     private String name;
 
