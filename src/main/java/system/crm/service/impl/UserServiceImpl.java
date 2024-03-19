@@ -1,7 +1,6 @@
 package system.crm.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import system.crm.domain.entity.User;
@@ -17,7 +16,6 @@ import java.util.Set;
 @Transactional
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -39,7 +37,7 @@ public class UserServiceImpl implements UserService {
         User existing = getById(user.getId());
         existing.setName(user.getName());
         existing.setUsername(user.getUsername());
-        existing.setPassword(passwordEncoder.encode(user.getPassword()));
+        existing.setPassword(user.getPassword());
         return userRepository.save(existing);
     }
 
@@ -49,7 +47,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new IllegalStateException("User already exists.");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(user.getPassword());
         Set<Role> roles = Set.of(Role.ROLE_USER);
         user.setRoles(roles);
         userRepository.save(user);
