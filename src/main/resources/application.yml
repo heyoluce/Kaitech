@@ -4,7 +4,6 @@ spring:
     username: ${PROD_DB_USERNAME}
     password: ${PROD_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
-    # name: kaitech-crmsystem
 
 springdoc:
   api-docs:

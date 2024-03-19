@@ -34,6 +34,12 @@ public class ControllerAdvice {
         return new ExceptionBody(e.getMessage());
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionBody handleIllegalArgument(IllegalArgumentException e){
+        return new ExceptionBody(e.getMessage());
+    }
+
 //    @ExceptionHandler({
 //            AccessDeniedException.class,
 //            org.springframework.security.access.AccessDeniedException.class

@@ -1,13 +1,19 @@
 package system.crm.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import system.crm.domain.enums.CourseField;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
+import system.crm.domain.enums.CourseName;
 import system.crm.domain.enums.Status;
+
+import java.util.Objects;
 
 @Entity
 @Table(name="courses")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class Course {
 
     @Id
@@ -16,7 +22,7 @@ public class Course {
 
     @Column(name="course_name")
     @Enumerated(value = EnumType.STRING)
-    private CourseField courseName;
+    private CourseName courseName;
 
     @Column(name="cost")
     private Integer cost;
@@ -36,4 +42,20 @@ public class Course {
 
     @Column(name="number_of_lessons")
     private Integer numberOfLessons;
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        Course course = (Course) o;
+        return getId() != null && Objects.equals(getId(), course.getId());
+    }
+
+    @Override
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
 }

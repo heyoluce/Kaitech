@@ -1,6 +1,7 @@
 package system.crm.web.dto;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import system.crm.web.dto.validation.OnCreate;
