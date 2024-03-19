@@ -29,10 +29,8 @@ public class MentorServiceImpl implements MentorService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Mentor getByEmail(String email) {
-        // todo
-        return mentorRepository.findByEmail(email)
+    public Mentor getByUsername(String username) {
+        return mentorRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("Mentor not found"));
     }
 
@@ -44,7 +42,7 @@ public class MentorServiceImpl implements MentorService {
 
     @Override
     public Mentor create(Mentor mentor) {
-        if (mentorRepository.findByEmail(mentor.getEmail()).isPresent()){
+        if (mentorRepository.findByUsername(mentor.getUsername()).isPresent()){
             throw new IllegalStateException("Mentor with this email already exists.");
         }
         mentorRepository.save(mentor);

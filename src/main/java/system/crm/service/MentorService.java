@@ -8,7 +8,7 @@ public interface MentorService {
     List<Mentor> getAll();
     Mentor getById(Long id);
 
-    Mentor getByEmail(String email);
+    Mentor getByUsername(String username);
 
     Mentor update(Mentor mentor);
 

@@ -33,7 +33,7 @@ dependencies {
 	implementation("org.flywaydb:flyway-database-postgresql:10.4.1")
 	implementation("org.hibernate.validator:hibernate-validator:$validatorVersion")
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0'
 
 
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
