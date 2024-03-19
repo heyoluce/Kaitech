@@ -1,7 +1,6 @@
 package system.crm.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import system.crm.domain.entity.Student;

@@ -58,13 +58,6 @@ jar {
 	enabled = true
 }
 
-flyway {
-	url = "jdbc:postgresql://" + System.getenv("PROD_DB_HOST") + ":" + System.getenv("PROD_DB_PORT") + "/" + System.getenv("PROD_DB_NAME")
-	user = System.getenv("PROD_DB_USERNAME")
-	password = System.getenv("PROD_DB_PASSWORD")
-	locations = ['filesystem:src/main/resources/db/migration']
-	configurations = ['flywayMigration']
-}
 
 task stage {
 	dependsOn bootJar
