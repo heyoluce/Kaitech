@@ -36,6 +36,8 @@ public class User implements Serializable {
     private String password;
 
     @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "users_roles")
     @Enumerated(value = EnumType.STRING)
     private Set<Role> roles;
 

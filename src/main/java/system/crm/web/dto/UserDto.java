@@ -19,6 +19,7 @@ import java.util.Date;
 @Schema(description = "User DTO")
 public class UserDto {
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     Long id;
 
     @NotNull(message = "name must be not null", groups = {OnCreate.class, OnUpdate.class})

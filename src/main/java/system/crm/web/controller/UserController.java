@@ -44,6 +44,14 @@ public class UserController {
         User user = userService.getById(id);
         return userMapper.toDto(user);
     }
+    @GetMapping("/username")
+    @Operation(summary = "Get UserDto by id")
+    public UserDto getByUsername(
+            String username
+    ) {
+        User user = userService.getByUsername(username);
+        return userMapper.toDto(user);
+    }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete user by id")

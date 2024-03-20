@@ -6,7 +6,7 @@ import lombok.Data;
 import system.crm.web.dto.validation.OnCreate;
 import system.crm.web.dto.validation.OnUpdate;
 
-;
+
 
 @Data
 public class MentorDto {

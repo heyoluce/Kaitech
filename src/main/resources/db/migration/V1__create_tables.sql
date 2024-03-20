@@ -64,12 +64,20 @@ CREATE TABLE IF NOT EXISTS users (
                                      password VARCHAR(255),
                                      date_of_birth DATE,
                                      phone_number VARCHAR(255),
-                                     role VARCHAR(255),
                                      enabled BOOLEAN,
                                      image_url VARCHAR(255),
                                      last_visit_date TIMESTAMP WITHOUT TIME ZONE,
                                      status VARCHAR(255)
 );
+
+create table if not exists users_roles
+(
+    user_id bigint       not null,
+    role    varchar(255) not null,
+    primary key (user_id, role),
+    constraint fk_users_roles_users foreign key (user_id) references users (id) on delete cascade on update no action
+);
+
 
 ALTER TABLE mentors
     ADD CONSTRAINT fk_mentors_course FOREIGN KEY (course_id) REFERENCES courses (id);

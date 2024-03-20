@@ -1,6 +1,7 @@
 package system.crm.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import system.crm.domain.entity.User;
@@ -16,15 +17,14 @@ import java.util.Set;
 @Transactional
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional(readOnly = true)
     public User getById(Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        System.out.println(user.getUsername());
-        return user;
+        return userRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found."));
     }
 
     @Override
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         User existing = getById(user.getId());
         existing.setName(user.getName());
         user.setUsername(user.getUsername());
-        user.setPassword(user.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return user;
     }
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new IllegalStateException("User already exists.");
         }
-        user.setPassword(user.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         Set<Role> roles = Set.of(Role.ROLE_USER);
         user.setRoles(roles);
         userRepository.save(user);

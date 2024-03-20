@@ -5,9 +5,14 @@ spring:
     password: ${PROD_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
-springdoc:
-  api-docs:
-    path: /api-docs
-  swagger-ui:
-    path: /swagger-ui.html
-    enabled: true
+security:
+  jwt:
+    access: 1
+    refresh: 30
+    secret: asdasdasojdasoidjasoidhasudiashiHASIODHASOIDHASOI12321
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG

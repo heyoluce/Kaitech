@@ -3,12 +3,14 @@ package system.crm.web.controller;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 import system.crm.domain.exception.ExceptionBody;
 import system.crm.domain.exception.ResourceNotFoundException;
 
@@ -88,7 +90,11 @@ public class ControllerAdvice {
 //        return new ExceptionBody("Authentication failed.");
 //    }
 
-
+    @ExceptionHandler(HttpClientErrorException.NotFound.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ExceptionBody handleNotFoundException(ChangeSetPersister.NotFoundException ex) {
+        return new ExceptionBody("Page dont found");
+    }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
