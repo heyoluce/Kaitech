@@ -6,6 +6,6 @@ spring:
     driver-class-name: org.postgresql.Driver
 security:
   jwt:
-    secret: SecretSecretkasdpaskdpoasjdpasijdasiojdADSJAS
-    access: 1
-    refresh: 30
+    secret: ${PROD_JWT_SECRET}
+    access: ${PROD_JWT_ACCESS}
+    refresh: ${PROD_JWT_REFRESH}
