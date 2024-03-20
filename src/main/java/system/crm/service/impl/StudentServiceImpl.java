@@ -50,7 +50,7 @@ public class StudentServiceImpl implements StudentService {
                 .findByUsername(email);
         if(existingStudent.isPresent()){
             Student foundStudent = existingStudent.get();
-            foundStudent.setFullName(studentDto.getFullName());
+            foundStudent.setName(studentDto.getName());
             foundStudent.setUsername(studentDto.getUsername());
             foundStudent.setPhoneNumber(studentDto.getPhoneNumber());
             studentRepository.save(foundStudent);

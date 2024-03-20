@@ -1,7 +1,10 @@
 package system.crm.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.proxy.HibernateProxy;
 import system.crm.domain.enums.Gender;
 import system.crm.domain.enums.Status;
@@ -23,8 +26,8 @@ public class Student implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="full_name")
-    private String fullName;
+    @Column(name="name")
+    private String name;
 
     @Column(name="username")
     private String username;

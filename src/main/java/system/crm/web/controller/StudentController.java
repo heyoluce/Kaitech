@@ -57,7 +57,7 @@ public class StudentController {
         return ResponseEntity.ok(studentService.update(email, studentDto));
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping()
     @Operation(summary = "Delete student by email")
     public ResponseEntity<Void> deleteStudent(@RequestParam String email) {
         Student existingStudent = studentService.getByEmail(email);

@@ -4,10 +4,7 @@ package system.crm.web.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import system.crm.domain.entity.User;
 import system.crm.service.AuthService;
 import system.crm.service.UserService;
@@ -49,7 +46,7 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public JwtResponse refresh(
-            @RequestBody final String refreshToken
+            @RequestParam(name = "refreshToken") final String refreshToken
     ) {
         return authService.refresh(refreshToken);
     }

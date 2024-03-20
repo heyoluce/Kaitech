@@ -1,5 +1,7 @@
 package system.crm.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -9,16 +11,30 @@ import system.crm.web.dto.validation.OnUpdate;
 
 @Data
 public class StudentDto {
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    Long id;
 
-    @NotBlank(message = "Full name is required", groups = {OnCreate.class, OnUpdate.class})
-    private String fullName;
+    @NotBlank(message = "Name is required", groups = {OnCreate.class, OnUpdate.class})
+    @Schema(
+            description = "Student name",
+            example = "Amantur Zholdoshov"
+    )
+    private String name;
 
     @Email(message = "Invalid email address", groups = {OnCreate.class, OnUpdate.class})
     @NotBlank(message = "Email is required", groups = {OnCreate.class, OnUpdate.class})
+    @Schema(
+            description = "Student email",
+            example = "azholdoshevv@gmail.com"
+    )
     private String username;
 
     @NotBlank(message = "Phone number is required", groups = {OnCreate.class, OnUpdate.class})
     @Pattern(regexp = "\\+996\\d{9}", message = "Invalid phone number format", groups = {OnUpdate.class, OnCreate.class} )
+    @Schema(
+            description = "Student phone number",
+            example = "+996771328181"
+    )
     private String phoneNumber;
 
     private Long courseId;

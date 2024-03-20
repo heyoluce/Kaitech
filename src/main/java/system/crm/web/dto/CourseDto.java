@@ -1,7 +1,7 @@
 package system.crm.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import system.crm.web.dto.validation.OnCreate;
@@ -9,6 +9,10 @@ import system.crm.web.dto.validation.OnUpdate;
 
 @Data
 public class CourseDto {
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    Long id;
+
     @NotNull(message = "Course name must not be null", groups = {OnCreate.class, OnUpdate.class})
     private String courseName;
     @NotNull(message = "Course description must not be null", groups = {OnCreate.class, OnUpdate.class})

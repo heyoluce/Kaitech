@@ -7,6 +7,7 @@ import system.crm.domain.enums.Role;
 import system.crm.domain.enums.Status;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -27,10 +28,10 @@ public class User implements Serializable {
     private String username;
 
     @Column(name="date_of_birth")
-    private Date date_of_birth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "phone_number")
-    private String phone_number;
+    private String phoneNumber;
 
     @Column(name="password")
     private String password;
