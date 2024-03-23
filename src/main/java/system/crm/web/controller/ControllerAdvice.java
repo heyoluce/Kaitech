@@ -5,12 +5,14 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
+import system.crm.domain.exception.AccessDeniedException;
 import system.crm.domain.exception.ExceptionBody;
 import system.crm.domain.exception.ResourceNotFoundException;
 
@@ -42,14 +44,14 @@ public class ControllerAdvice {
         return new ExceptionBody(e.getMessage());
     }
 
-//    @ExceptionHandler({
-//            AccessDeniedException.class,
-//            org.springframework.security.access.AccessDeniedException.class
-//    })
-//    @ResponseStatus(HttpStatus.FORBIDDEN)
-//    public ExceptionBody handleAccessDenied() {
-//        return new ExceptionBody("Access denied.");
-//    }
+    @ExceptionHandler({
+            AccessDeniedException.class,
+            org.springframework.security.access.AccessDeniedException.class
+    })
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ExceptionBody handleAccessDenied() {
+        return new ExceptionBody("Access denied.");
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -82,18 +84,18 @@ public class ControllerAdvice {
         return exceptionBody;
     }
 
-//    @ExceptionHandler(AuthenticationException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public ExceptionBody handleAuthentication(
-//            final AuthenticationException e
-//    ) {
-//        return new ExceptionBody("Authentication failed.");
-//    }
+    @ExceptionHandler(AuthenticationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionBody handleAuthentication(
+            final AuthenticationException e
+    ) {
+        return new ExceptionBody("Authentication failed.");
+    }
 
     @ExceptionHandler(HttpClientErrorException.NotFound.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ExceptionBody handleNotFoundException(ChangeSetPersister.NotFoundException ex) {
-        return new ExceptionBody("Page dont found");
+        return new ExceptionBody("Resource not found");
     }
 
     @ExceptionHandler(Exception.class)
