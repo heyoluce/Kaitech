@@ -11,30 +11,31 @@ import system.crm.web.dto.CourseDto;
 import system.crm.web.mappers.CourseMapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
-    private final CourseMapper courseMapper;
 
     @Override
-    public CourseDto getById(Long id) {
-        return null;
+    public Course getById(Long id) {
+        return courseRepository.findById(id).
+                orElseThrow(() ->
+                        new ResourceNotFoundException("Course not found"));
     }
 
     @Override
-    public List<CourseDto> getAllCourses() {
-        List<Course> allCourses = courseRepository.findAll();
-        if (allCourses.isEmpty()) throw new ResourceNotFoundException("The list of courses is empty.");
-        else return courseMapper.toDto(allCourses);
+    public Course create(Course course) {
+        courseRepository.save(course);
+        return course;
     }
 
+
     @Override
-    public CourseDto create(CourseDto courseDto) {
-        Course createdCourse = courseMapper.toEntity(courseDto);
-        courseRepository.save(createdCourse);
-        return courseMapper.toDto(createdCourse);
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
     }
+
 }

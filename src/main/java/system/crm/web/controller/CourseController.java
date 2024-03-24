@@ -8,9 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import system.crm.domain.entity.Course;
 import system.crm.service.CourseService;
 import system.crm.web.dto.CourseDto;
 import system.crm.web.dto.validation.OnCreate;
+import system.crm.web.mappers.CourseMapper;
 
 import java.util.List;
 
@@ -24,16 +26,22 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class CourseController {
+
     private final CourseService courseService;
+    private final CourseMapper courseMapper;
     @PostMapping
     @Operation(summary = "Create a course")
-    public ResponseEntity<CourseDto> create(@Validated(OnCreate.class) @RequestBody CourseDto courseDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(courseService.create(courseDto));
+    public ResponseEntity<CourseDto> create(@Validated(OnCreate.class)
+                                                @RequestBody CourseDto courseDto){
+        Course course = courseMapper.toEntity(courseDto);
+        courseService.create(course);
+        return ResponseEntity.ok(courseDto);
     }
 
     @GetMapping
     @Operation(summary = "Get all courses")
     public ResponseEntity<List<CourseDto>> getAll(){
-        return ResponseEntity.ok(courseService.getAllCourses());
+        List<CourseDto> courseDto = courseMapper.toDto(courseService.getAllCourses());
+        return ResponseEntity.ok(courseDto);
     }
 }

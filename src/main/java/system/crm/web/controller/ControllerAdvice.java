@@ -98,13 +98,13 @@ public class ControllerAdvice {
         return new ExceptionBody("Resource not found");
     }
 
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ExceptionBody handleException(
-            final Exception e
-    ) {
-        e.printStackTrace();
-        return new ExceptionBody("Internal error.");
-    }
+//    @ExceptionHandler(Exception.class)
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    public ExceptionBody handleException(
+//            final Exception e
+//    ) {
+//        e.printStackTrace();
+//        return new ExceptionBody("Internal error.");
+//    }
 
 }
