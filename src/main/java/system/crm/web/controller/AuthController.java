@@ -1,6 +1,7 @@
 package system.crm.web.controller;
 
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -28,6 +29,7 @@ public class AuthController {
     private final UserMapper userMapper;
 
     @PostMapping("/login")
+    @Operation(summary = "Sign in")
     public JwtResponse login(
             @Validated @RequestBody final JwtRequest loginRequest
     ) {
@@ -35,6 +37,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @Operation(summary = "Sign up")
     public UserDto register(
             @Validated(OnCreate.class)
             @RequestBody final UserDto userDto
@@ -45,6 +48,7 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
+    @Operation(summary = "Refresh access token")
     public JwtResponse refresh(
             @RequestParam(name = "refreshToken") final String refreshToken
     ) {
