@@ -51,7 +51,7 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.create(studentDto));
     }
 
-    @PatchMapping("/update")
+    @PatchMapping()
     @Operation(summary = "Update info about student")
     public ResponseEntity<StudentDto> updateStudent(@RequestParam(name = "email") String email, @Validated(OnUpdate.class) @RequestBody StudentDto studentDto) throws ResourceNotFoundException {
         return ResponseEntity.ok(studentService.update(email, studentDto));
