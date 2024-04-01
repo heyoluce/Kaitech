@@ -126,7 +126,7 @@ public class ApplicationConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("*")); // Разрешить с любого хоста
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:5173"));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "UPDATE", "DELETE"));
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.setAllowedHeaders(List.of("*"));
