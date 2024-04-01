@@ -10,6 +10,7 @@ import system.crm.service.StudentService;
 import system.crm.web.dto.StudentDto;
 import system.crm.web.mappers.StudentMapper;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,6 +66,7 @@ public class StudentServiceImpl implements StudentService {
             throw new IllegalStateException("Student with this email already exists.");
         } else{
             Student createdStudent = studentMapper.toEntity(studentDto);
+            createdStudent.setCreated_at(LocalDateTime.now());
             studentRepository.save(createdStudent);
             return studentMapper.toDto(createdStudent);
 

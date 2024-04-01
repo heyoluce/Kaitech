@@ -11,6 +11,7 @@ import system.crm.domain.enums.Status;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -54,6 +55,10 @@ public class Student implements Serializable {
 
     @Column(name="total_payment")
     private BigDecimal totalPayment;
+
+    @Column(name="created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime created_at;
 
     @Override
     public final boolean equals(Object o) {

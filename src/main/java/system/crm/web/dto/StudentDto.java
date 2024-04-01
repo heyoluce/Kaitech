@@ -9,6 +9,8 @@ import lombok.Data;
 import system.crm.web.dto.validation.OnCreate;
 import system.crm.web.dto.validation.OnUpdate;
 
+import java.time.LocalDateTime;
+
 @Data
 public class StudentDto {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
@@ -38,4 +40,7 @@ public class StudentDto {
     private String phoneNumber;
 
     private Long courseId;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private LocalDateTime created_at;
 }

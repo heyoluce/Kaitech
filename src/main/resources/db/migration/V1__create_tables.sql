@@ -31,7 +31,9 @@ CREATE TABLE IF NOT EXISTS students (
                                         date_of_birth TIMESTAMP WITHOUT TIME ZONE,
                                         gender VARCHAR(255),
                                         total_debt DECIMAL,
-                                        total_payment DECIMAL
+                                        total_payment DECIMAL,
+                                        created_at TIMESTAMP,
+                                        graduated BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS groups (
@@ -78,6 +80,13 @@ create table if not exists users_roles
     constraint fk_users_roles_users foreign key (user_id) references users (id) on delete cascade on update no action
 );
 
+CREATE TABLE IF NOT EXISTS student_course (
+                                              student_id BIGINT,
+                                              course_id BIGINT,
+                                              PRIMARY KEY (student_id, course_id),
+                                              FOREIGN KEY (student_id) REFERENCES students (id) ON DELETE CASCADE,
+                                              FOREIGN KEY (course_id) REFERENCES courses (id) ON DELETE CASCADE
+);
 
 ALTER TABLE mentors
     ADD CONSTRAINT fk_mentors_course FOREIGN KEY (course_id) REFERENCES courses (id);
