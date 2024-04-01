@@ -22,6 +22,7 @@ import system.crm.web.mappers.UserMapper;
         name = "Auth Controller",
         description = "Auth API"
 )
+@CrossOrigin
 public class AuthController {
 
     private final AuthService authService;
