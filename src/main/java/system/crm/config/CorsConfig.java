@@ -10,15 +10,14 @@ import java.util.Collections;
 @Configuration
 public class CorsConfig {
     @Bean
-    public WebMvcConfigurer corsConfigure() {
+    public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/v1/**")
-                        .allowCredentials(true)
-                        .allowedOrigins("http://localhost:5173")
-                        .allowedMethods("*")
-                        .allowedHeaders("*");
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("POST", "GET", "OPTIONS", "PUT", "DELETE")
+                        .allowedHeaders("Content-Type", "X-Auth-Token", "Origin", "Authorization");
             }
         };
     }
