@@ -41,7 +41,6 @@ public class UserDto {
     private LocalDate dateOfBirth;
 
     @NotNull(message = "Phone number must not be null", groups = {OnCreate.class, OnUpdate.class})
-    @Pattern(regexp = "\\+996\\d{9}", message = "Invalid phone number format", groups = {OnUpdate.class, OnCreate.class} )
     @Schema(
             description = "User phone number",
             example = "+996771328181"
